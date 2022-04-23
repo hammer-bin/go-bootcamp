@@ -47,32 +47,25 @@ import (
 // ---------------------------------------------------------
 
 func main() {
-	args := os.Args[1:]
-	if len(args) == 0 {
+	items := os.Args[1:]
+	if len(items) == 0 {
 		fmt.Println("Provide a parameter")
 		return
 	}
 
-	var arg []string
-
-	for i := 0; i < len(args); i++ {
-		arg = append(arg, args[i])
-	}
-	//fmt.Printf("%s", arg)
-
-	sort.Strings(arg)
-	for i := 0; i < len(args); i++ {
-		fmt.Println(arg[i])
+	sort.Strings(items)
+	for i := 0; i < len(items); i++ {
+		fmt.Println(items[i])
 	}
 
 	var total int
-	for _, data := range arg {
+	for _, data := range items {
 		total += len(data) + 1
 	}
 	fmt.Printf("Total required space: %d bytes.\n", total)
 
 	names := make([]byte, 0, total)
-	for _, data := range arg {
+	for _, data := range items {
 		names = append(names, data...)
 		names = append(names, '\n')
 	}
