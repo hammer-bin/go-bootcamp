@@ -47,6 +47,12 @@ import (
 // ---------------------------------------------------------
 
 func main() {
+	//exam01()
+	writeByte()
+
+}
+
+func exam01() {
 	items := os.Args[1:]
 	if len(items) == 0 {
 		fmt.Println("Provide a parameter")
@@ -74,5 +80,27 @@ func main() {
 	if err != nil {
 		return
 	}
+}
 
+func writeByte() {
+	err := os.Chdir("D:\\workspace_go\\go-bootcamp\\section6\\exam01")
+	if err != nil {
+		fmt.Println(err)
+	}
+	getwd, err := os.Getwd()
+	if err != nil {
+		return
+	}
+	fmt.Println("Current Directory:: ", getwd)
+	data := make([]byte, 0, 200)
+	aa := []byte("abced")
+
+	data = append(data, aa...)
+	err = ioutil.WriteFile("kubespray_var.sh", data, 0644)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	varContents := fmt.Sprint(`#!/bin/bash`, "\n\n", "export MASTER_NODE_HOSTNAME=")
+	fmt.Println(varContents)
 }
