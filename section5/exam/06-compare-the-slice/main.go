@@ -10,6 +10,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -44,9 +45,20 @@ func main() {
 
 	namesB := []string{"Wozniak", "Da Vinci", "Carmack"}
 
+	sort.Strings(slice)
+
 	if len(slice) == len(namesB) {
 		for i, v := range slice {
 			fmt.Printf("nameA :: %s   nameB :: %s  :: %t\n", v, namesB[i], v == namesB[i])
 		}
+
+		for i := range slice {
+			if slice[i] != namesB[i] {
+				fmt.Println("They are not equal")
+				return
+			}
+			fmt.Println("They are equal")
+		}
 	}
+
 }
