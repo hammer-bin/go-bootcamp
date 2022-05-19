@@ -8,6 +8,11 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Append and Sort Numbers
 //
@@ -43,4 +48,8 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	param := os.Args[1:]
+	if len(param) == 0 {
+		fmt.Println("provide a few numbers")
+	}
 }
