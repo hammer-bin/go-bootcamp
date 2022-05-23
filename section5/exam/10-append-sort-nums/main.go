@@ -11,6 +11,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"sort"
+	"strconv"
 )
 
 // ---------------------------------------------------------
@@ -51,5 +53,21 @@ func main() {
 	param := os.Args[1:]
 	if len(param) == 0 {
 		fmt.Println("provide a few numbers")
+	} else {
+		fmt.Println(param)
 	}
+
+	var rst []int
+	for _, v := range param {
+		n, err := strconv.Atoi(v)
+		if err != nil {
+			continue
+		}
+		rst = append(rst, n)
+	}
+
+	sort.Ints(rst)
+
+	fmt.Println(rst)
+
 }
