@@ -8,46 +8,18 @@
 
 package main
 
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
 // ---------------------------------------------------------
-// EXERCISE: Housing Prices
+// EXERCISE: Housing Prices and Averages
 //
-//  We have received housing prices. Your task is to load the data into
-//  appropriately typed slices then print them.
+//  Use the previous exercise to solve this exercise (Housing Prices).
 //
-//  1. Check out the expected output
-//
-//
-//  2. Check out the code below
-//
-//     1. header   : stores the column headers
-//     2. data     : stores the real data related to each column
-//     3. separator: you will use it to separate the data
-//
-//
-//  3. Parse the data
-//
-//     1. Separate it into rows by using the newline character ("\n")
-//
-//     2. For each row, separate it by using the separator (",")
-//
-//
-//  4. Load the data into distinct slices
-//
-//     1. Load the locations into a []string
-//     2. Load the sizes into []int
-//     3. Load the beds into []int
-//     4. Load the baths into []int
-//     5. Load the prices into []int
-//
-//
-//  5. Print the header
-//
-//     1. Separate it by using the separator
-//
-//     2. Print each column 15 character wide ("%-15s")
-//
-//
-//  6. Print the rows from the slices that you've created, line by line
+//  Your task is to print the averages of the sizes, beds, baths, and prices.
 //
 //
 // EXPECTED OUTPUT
@@ -59,10 +31,8 @@ package main
 //  Paris          200            4              3              400000
 //  Istanbul       500            10             5              1000000
 //
-//
-// HINTS
-//
-//  + strings.Split function can separate a string into a []string
+//  ===========================================================================
+//                 237.50         4.75           2.75           425000.00
 //
 // ---------------------------------------------------------
 
@@ -76,4 +46,101 @@ Istanbul,500,10,5,1000000`
 
 		separator = ","
 	)
+
+	// Solve this exercise by using your previous solution for
+	// the "Housing Prices" exercise.
+
+	var (
+		locs                       []string
+		sizes, beds, baths, prices []int
+	)
+	rows := strings.Split(data, "\n")
+
+	for _, row := range rows {
+		cols := strings.Split(row, separator)
+
+		locs = append(locs, cols[0])
+
+		n, _ := strconv.Atoi(cols[1])
+		sizes = append(sizes, n)
+
+		n, _ = strconv.Atoi(cols[2])
+		beds = append(beds, n)
+
+		n, _ = strconv.Atoi(cols[3])
+		baths = append(baths, n)
+
+		n, _ = strconv.Atoi(cols[4])
+		prices = append(prices, n)
+	}
+
+	for _, h := range strings.Split(header, separator) {
+		fmt.Printf("%-15s", h)
+	}
+
+	fmt.Printf("\n%s\n", strings.Repeat("=", 75))
+
+	for i := range rows {
+		fmt.Printf("%-15s", locs[i])
+		fmt.Printf("%-15d", sizes[i])
+		fmt.Printf("%-15d", beds[i])
+		fmt.Printf("%-15d", baths[i])
+		fmt.Printf("%-15d\n", prices[i])
+	}
+
+	fmt.Printf("\n%s\n", strings.Repeat("=", 75))
+
+	sizeAvg, bedAvg, bathAvg, priceAvg := 0, 0, 0, 0
+	for _, v := range sizes {
+		sizeAvg += v
+	}
+	sizeAvg = sizeAvg / len(beds)
+	for _, v := range beds {
+		bedAvg += v
+	}
+	bedAvg = bedAvg / len(sizes)
+	for _, v := range baths {
+		bathAvg += v
+	}
+	bathAvg = bathAvg / len(baths)
+	for _, v := range prices {
+		priceAvg += v
+	}
+	priceAvg = priceAvg / len(prices)
+	fmt.Printf("%-15d", 0)
+	fmt.Printf("%-15d", sizeAvg)
+	fmt.Printf("%-15d", bedAvg)
+	fmt.Printf("%-15d", bathAvg)
+	fmt.Printf("%-15d", priceAvg)
+
+	// solution
+	// jump over the location column
+	fmt.Printf("%-15s", "")
+
+	var sum int
+
+	for _, n := range sizes {
+		sum += n
+	}
+	fmt.Printf("%-15.2f", float64(sum)/float64(len(sizes)))
+
+	sum = 0
+	for _, n := range beds {
+		sum += n
+	}
+	fmt.Printf("%-15.2f", float64(sum)/float64(len(beds)))
+
+	sum = 0
+	for _, n := range baths {
+		sum += n
+	}
+	fmt.Printf("%-15.2f", float64(sum)/float64(len(baths)))
+
+	sum = 0
+	for _, n := range prices {
+		sum += n
+	}
+	fmt.Printf("%-15.2f", float64(sum)/float64(len(prices)))
+
+	fmt.Println()
 }
