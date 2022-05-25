@@ -67,13 +67,35 @@ func main() {
 	data := "2 4 6 1 3 5"
 	sli := strings.Split(data, " ")
 	nums := sli[:]
+	var intnums []int
 	var evens []int
+	var odds []int
+	var middle []int
+	var first2 []int
+	var last2 []int
+	var evensl1 []int
+	var oddsl2 []int
 	for _, v := range sli {
 		a, _ := strconv.Atoi(v)
 		if a%2 == 0 {
 			evens = append(evens, a)
 		}
+		if a%2 == 1 {
+			odds = append(odds, a)
+		}
+		intnums = append(intnums, a)
 	}
+	middle = intnums[len(intnums)/2-1 : len(intnums)/2+1]
+	first2 = intnums[:2]
+	last2 = intnums[len(intnums)-2:]
+	evensl1 = evens[len(evens)-1:]
+	oddsl2 = odds[len(odds)-2:]
 	fmt.Println("nums : ", nums)
 	fmt.Println("evens : ", evens)
+	fmt.Println("odds : ", odds)
+	fmt.Println("middle :", middle)
+	fmt.Println("first 2 :", first2)
+	fmt.Println("last 2 :", last2)
+	fmt.Println("evens last 1 :", evensl1)
+	fmt.Println("odds last 2 :", oddsl2)
 }
